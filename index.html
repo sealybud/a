@@ -12,14 +12,37 @@
 
     <form name="contact" netlify>
   <p>
-    <label>Name <input type="text" name="name" /></label>
+    <label>Name <input id="input" type="text" name="name" /></label>
   </p>
   <p>
-    <label>Email <input type="email" name="email" /></label>
+    <button id="button" type="submit">Send</button>
   </p>
-  <p>
-    <button type="submit">Send</button>
-  </p>
+<p id="textarea"></p>
+
+<script>
+const button = document.getElementById("button")
+const textarea = document.getElementById("textarea")
+const input = document.getElementById("input")
+
+button.addEventListener("click", function() {
+  const inputValue = input.value.trim();
+  if (inputValue === "") return;
+
+  const POSTING = new Date();
+
+    const POSTDATE = POSTING.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    });
+
+  const newPost = `${inputValue} \n (${username}, ${POSTDATE})`
+
+  textarea.textContent += (textarea.textContent ? "\n\n" : "") + newPost;
+
+  input.value = "";
+});
+</script>
 </form>
 </body>
 </html>
